@@ -1,23 +1,25 @@
 require 'rails_helper'
 
- RSpec.describe 'professors index' do
-  it "text" do
+RSpec.describe 'professors index' do
+   describe 'user story 1' do
+    it "can display a list of all professors and their attributes" do
 
-    dumbledore = Professor.create!(name: 'Albus Dumbledore', age: 319, specialty: 'Being old and super chill')
-    snape = Professor.create!(name: 'Siverus Snape', age: 55, specialty: 'Dark arts and snake stuff')
-    mcgonagall = Professor.create!(name: 'Minerva McGonagall', age: 155, specialty: 'Agreeable and potions')
+      snape = Professor.create!(name: "Severus Snape", age: 45, specialty: "Potions")
+      hagarid = Professor.create!(name: "Rubeus Hagrid", age: 38 , specialty: "Care of Magical Creatures")
+      lupin = Professor.create!(name: "Remus Lupin", age: 49 , specialty: "Defense Against The Dark Arts")
 
-    visit '/professors'
+      visit '/professors'
 
-    expect(page).to have_content(dumbledore.name)
-    expect(page).to have_content(dumbledore.age)
-    expect(page).to have_content(dumbledore.specialty)
-    expect(page).to have_content(snape.name)
-    expect(page).to have_content(snape.age)
-    expect(page).to have_content(snape.specialty)
-    expect(page).to have_content(mcgonagall.name)
-    expect(page).to have_content(mcgonagall.age)
-    expect(page).to have_content(mcgonagall.specialty)
+      expect(page).to have_content(snape.name)
+      expect(page).to have_content(snape.age)
+      expect(page).to have_content(snape.specialty)
+      expect(page).to have_content(hagarid.name)
+      expect(page).to have_content(hagarid.age)
+      expect(page).to have_content(hagarid.specialty)
+      expect(page).to have_content(lupin.name)
+      expect(page).to have_content(lupin.age)
+      expect(page).to have_content(lupin.specialty)
 
+    end
   end
- end
+end

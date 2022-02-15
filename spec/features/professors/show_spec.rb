@@ -1,27 +1,35 @@
 require 'rails_helper'
 
- RSpec.describe 'professor show page' do
-  it "can display a list of the names of the students the professors have" do
-    dumbledore = Professor.create!(name: 'Albus Dumbledore', age: 319, specialty: 'Being old and super chill')
-    snape = Professor.create!(name: 'Siverus Snape', age: 55, specialty: 'Dark arts and snake stuff')
-    mcgonagall = Professor.create!(name: 'Minerva McGonagall', age: 155, specialty: 'Agreeable and potions')
+RSpec.describe 'professor show page' do
+ describe 'user story 2' do
+    it "can display a list of the names of the students the professors have" do
+      snape = Professor.create(name: "Severus Snape", age: 45, specialty: "Potions")
+      hagarid = Professor.create(name: "Rubeus Hagrid", age: 38 , specialty: "Care of Magical Creatures")
+      lupin = Professor.create(name: "Remus Lupin", age: 49 , specialty: "Defense Against The Dark Arts")
 
-    hermione = Student.create!(name: 'Hermione Granger', age: 15, house: 'Griffindor')
-    harry = Student.create!(name: 'Harry Potter', age: 16, house: 'Griffindor')
-    macmillian = Student.create!(name: 'Ernie Macmillan', age: 17, house: 'Hufflepuff')
+      harry = Student.create(name: "Harry Potter" , age: 11 , house: "Gryffindor" )
+      malfoy = Student.create(name: "Draco Malfoy" , age: 12 , house: "Slytherin" )
+      longbottom = Student.create(name: "Neville Longbottom" , age: 11 , house: "Gryffindor" )
 
-    ProfessorStudent.create(student_id: hermione.id, professor_id: dumbledore.id)
-    ProfessorStudent.create(student_id: hermione.id, professor_id: snape.id)
-    ProfessorStudent.create(student_id: hermione.id, professor_id: mcgonagall.id)
-    ProfessorStudent.create(student_id: harry.id, professor_id: dumbledore.id)
-    ProfessorStudent.create(student_id: harry.id, professor_id: snape.id)
-    ProfessorStudent.create(student_id: harry.id, professor_id: mcgonagall.id)
-    ProfessorStudent.create(student_id: macmillian.id, professor_id: dumbledore.id)
-    ProfessorStudent.create(student_id: macmillian.id, professor_id: mcgonagall.id)
+      ProfessorStudent.create(student_id: harry.id, professor_id: snape.id)
+      ProfessorStudent.create(student_id: harry.id, professor_id: hagarid.id)
+      ProfessorStudent.create(student_id: harry.id, professor_id: lupin.id)
+      ProfessorStudent.create(student_id: malfoy.id, professor_id: hagarid.id)
+      ProfessorStudent.create(student_id: malfoy.id, professor_id: lupin.id)
+      ProfessorStudent.create(student_id: longbottom.id, professor_id: snape.id)
 
-    visit "/professors/#{dumbledore.id}"
+      visit "/professors/#{snape.id}"
 
-    expect(page).to have_content(hermione.name)
+      expect(page).to have_content(harry.name)
 
+      visit "/professors/#{hagarid.id}"
+
+      expect(page).to have_content(malfoy.name)
+
+      visit "/professors/#{lupin.id}"
+
+      expect(page).to have_content(malfoy.name)
+    end
   end
- end
+
+end
