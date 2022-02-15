@@ -45,7 +45,7 @@ RSpec.describe 'students index page' do
        visit '/students'
        # save_and_open_page
 
-       expect(page).to have_content(2)
+       expect(page).to have_content(3)
      end
    end
 end

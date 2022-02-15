@@ -4,4 +4,8 @@ class Student <ApplicationRecord
   validates_presence_of :name, presence: true
   validates_presence_of :age, presence: true
   validates_presence_of :house, presence: true
+
+  def self.avg_age
+    sum(:age)/count(:age)
+  end
 end
